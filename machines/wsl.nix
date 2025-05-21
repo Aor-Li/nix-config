@@ -1,6 +1,6 @@
-{ inputs, curUser, ... }: 
+{ nixpkgs, inputs, curUser, ... }: 
 {
-  inputs.nixos-wsl.nixosModules.wsl = {
+  wsl = {
     enable = true;
     defaultUser = curUser;
     startMenuLaunchers = true;

@@ -19,13 +19,15 @@ let
 in nixpkgs.lib.nixosSystem rec {
   inherit system;
   specialArgs = {
-    inherit inputs;
+    inherit inputs nixpkgs;
     curSystem = system;
     curOS = os;
     curMachine = machine;
     curUser = user;
   };
   modules = [
+    (inputs.nixos-wsl.nixosModules.wsl)
+    
     # configurations related to system (now only nixos)
     systemConfig
     # configurations related to machine (now only wsl, nixos soon)

@@ -27,14 +27,23 @@ in nixpkgs.lib.nixosSystem rec {
     # configurations related to user (aor)
     userConfig
     # here we expose arguments to modules
-    {
-      config._module.args = {
-        curSystem = system;
-        curOS = os;
-        curMachine = machine;
-        curUser = user;
-        inputs = inputs;
-      };
-    }
+  
+    # {
+    #   config._module.args = {
+    #     curSystem = system;
+    #     curOS = os;
+    #     curMachine = machine;
+    #     curUser = user;
+    #     inputs = inputs;
+    #   };
+    # }
+
   ];
+  specialArgs = {
+    curSystem = system;
+    curOS = os;
+    curMachine = machine;
+    curUser = user;
+    inherit inputs;
+  };
 }

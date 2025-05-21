@@ -1,7 +1,6 @@
-{ pkgs, curUser, ... }: {
-  imports = [];
+{ pkgs, inputs, curUser, ... }: {
 
-  wsl = {
+  inputs.nixos-wsl.nixosModules.wsl = {
     enable = true;
     defaultUser = curUser;
     startMenuLaunchers = true;

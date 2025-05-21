@@ -22,24 +22,6 @@
         ./nixos/configuration.nix
       ];
     };
-	
-    # system.stateVersion = "24.11";
-    
-    #nix.settings.substituers = [
-    #  "https://mirror.sjtu.edu.cn/nix-channels/store"
-    #  "https://mirrors.ustc.edu.cn/nix-channels/store"
-    #  "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
-    #];
-
-    #nix.settings.experimental-features = [ "nix-command" "flakes" ];
-    #environment = {
-    #  systemPackages = with nixpkgs; [
-    #    git
-    #    vim
-    #    wget
-    #  ];
-    #  variables.EDITOR = "vim";
-    #};
   };
 }
 

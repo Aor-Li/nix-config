@@ -1,5 +1,4 @@
-{ pkgs, inputs, curUser, ... }: 
-
+{ inputs, curUser, ... }: 
 {
   inputs.nixos-wsl.nixosModules.wsl = {
     enable = true;

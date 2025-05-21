@@ -12,13 +12,19 @@ name : {
 
 let 
   system = "x86_64-linux";
-  
   systemConfig = ../systems/${os}.nix;
   machineConfig = ../machines/${machine}.nix;
   userConfig = ../users/${user}.nix;
 
 in nixpkgs.lib.nixosSystem rec {
   inherit system;
+  specialArgs = {
+    inherit inputs;
+    curSystem = system;
+    curOS = os;
+    curMachine = machine;
+    curUser = user;
+  };
   modules = [
     # configurations related to system (now only nixos)
     systemConfig
@@ -37,13 +43,6 @@ in nixpkgs.lib.nixosSystem rec {
     #     inputs = inputs;
     #   };
     # }
-
   ];
-  specialArgs = {
-    curSystem = system;
-    curOS = os;
-    curMachine = machine;
-    curUser = user;
-    inherit inputs;
-  };
+  
 }

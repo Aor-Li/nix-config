@@ -26,7 +26,6 @@ in nixpkgs.lib.nixosSystem rec {
     curUser = user;
   };
   modules = [
-    (inputs.nixos-wsl.nixosModules.wsl)
     # configurations related to system (now only nixos)
     systemConfig
     # configurations related to machine (now only wsl, nixos soon)
@@ -34,5 +33,4 @@ in nixpkgs.lib.nixosSystem rec {
     # # configurations related to user (aor)
     userConfig
   ];
-  
 }

@@ -1,7 +1,9 @@
 { nixpkgs, inputs, curUser, ... }: 
 {
-  imports = [];
-  
+  imports = [
+    inputs.nixos-wsl.nixosModules.wsl
+  ];
+
   wsl = {
     enable = true;
     wslConf.automount.root = "/mnt";

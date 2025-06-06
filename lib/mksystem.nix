@@ -4,12 +4,7 @@
 
 { nixpkgs, inputs, ... }: 
 
-name : {
-  os,
-  machine,
-  user,
-}:
-
+{ machine, os, user }:
 let 
   system = "x86_64-linux";
   systemConfig = ../systems/${os}.nix;
@@ -34,17 +29,6 @@ in nixpkgs.lib.nixosSystem rec {
     machineConfig
     # configurations related to user (aor)
     userConfig
-    # here we expose arguments to modules
-  
-    # {
-    #   config._module.args = {
-    #     curSystem = system;
-    #     curOS = os;
-    #     curMachine = machine;
-    #     curUser = user;
-    #     inputs = inputs;
-    #   };
-    # }
   ];
   
 }

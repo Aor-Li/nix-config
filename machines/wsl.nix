@@ -1,6 +1,8 @@
 { nixpkgs, inputs, curUser, ... }: 
 {
-  wsl = {
+  imports = [];
+
+  options.wsl = {
     enable = true;
     defaultUser = curUser;
     startMenuLaunchers = true;

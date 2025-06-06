@@ -13,14 +13,14 @@
       inherit nixpkgs inputs;
     };
   in {
-    nixosConfigurations.wsl = mkSystem {
-      machine = "wsl";
+    nixosConfigurations.wsl = mkSystem "wsl_config" {
       os = "nixos";
+      machine = "wsl";
       user = "aor";
     };
-    nixosConfigurations.aoostar = mkSystem {
-      machine = "aoostar";
+    nixosConfigurations.aoostar = mkSystem "minipc_config" {
       os = "nixos";
+      machine = "aoostar";
       user = "aor";
     };
   };

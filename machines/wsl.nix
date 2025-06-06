@@ -1,9 +1,10 @@
 { nixpkgs, inputs, curUser, ... }: 
 {
   imports = [];
-
-  options.wsl = {
+  
+  wsl = {
     enable = true;
+    wslConf.automount.root = "/mnt";
     defaultUser = curUser;
     startMenuLaunchers = true;
   };

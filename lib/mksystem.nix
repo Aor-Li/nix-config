@@ -4,7 +4,12 @@
 
 { nixpkgs, inputs, ... }: 
 
-{ machine, os, user }:
+config_name:
+{ 
+  os, 
+  machine, 
+  user 
+}:
 let 
   system = "x86_64-linux";
   systemConfig = ../systems/${os}.nix;
@@ -22,12 +27,11 @@ in nixpkgs.lib.nixosSystem rec {
   };
   modules = [
     (inputs.nixos-wsl.nixosModules.wsl)
-    
     # configurations related to system (now only nixos)
     systemConfig
     # configurations related to machine (now only wsl, nixos soon)
     machineConfig
-    # configurations related to user (aor)
+    # # configurations related to user (aor)
     userConfig
   ];
   

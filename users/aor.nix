@@ -2,10 +2,13 @@
 
 {
   programs.home-manager.enable = true;
-  
   home.username = "aor";
   home.homeDirectory = "/home/aor";
   home.stateVersion = "25.05"; # Please read the comment before changing.
+
+  imports = [
+    ./shell/default.nix
+  ];
 
   home.packages = [
     pkgs.hello

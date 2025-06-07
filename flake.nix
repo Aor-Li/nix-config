@@ -16,13 +16,15 @@
     lib = nixpkgs.lib;
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inherit inputs nixpkgs;
-        curUser = "aor";
+    nixosConfigurations = {
+      wsl = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs nixpkgs;
+          curUser = "aor";
+        };
+        inherit system;
+        modules = [ ./machines/wsl.nix ];
       };
-      inherit system;
-      modules = [ ./machines/wsl.nix ];
     };
 
     # user configurations

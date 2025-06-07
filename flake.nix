@@ -3,25 +3,34 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # home manager
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     # wsl
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, ... }@inputs: let
-    mkSystem = import ./lib/mksystem.nix {
-      inherit nixpkgs inputs;
-    };
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }@inputs: let    
+    system = "x86_64-linux";
+    lib = nixpkgs.lib;
+    pkgs = nixpkgs.legacyPackages.${system};
   in {
-    nixosConfigurations.wsl = mkSystem "wsl_config" {
-      os = "nixos";
-      machine = "wsl";
-      user = "aor";
+    nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs nixpkgs;
+        curUser = "aor";
+      };
+      inherit system;
+      modules = [ ./machines/wsl.nix ];
     };
-    nixosConfigurations.aoostar = mkSystem "minipc_config" {
-      os = "nixos";
-      machine = "aoostar";
-      user = "aor";
+
+    # user configurations
+    homeConfigurations = {
+      aor = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./users/aor.nix ];
+      };
     };
   };
 }

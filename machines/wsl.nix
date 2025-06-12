@@ -15,6 +15,7 @@
   # config wsl module
   imports = [
     inputs.nixos-wsl.nixosModules.wsl
+    ./dm/plasma.nix
   ];
   wsl = {
     enable = true;

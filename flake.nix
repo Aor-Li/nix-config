@@ -29,9 +29,18 @@
         modules = [ ./machines/wsl.nix ];
       };
     };
+    nixosConfigurations = {
+      aoostar = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs nixpkgs;
+          curUser = "aor";
+        };
+        inherit system;
+        modules = [ ./machines/aoostar.nix ];
+      };
+    };
 
-    # user configurations
-    homeConfigurations = {
+    homeManagerConfigurations = {
       aor = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./users/aor.nix ];

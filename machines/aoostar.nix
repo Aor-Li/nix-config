@@ -14,15 +14,8 @@
 
   # config modules
   imports = [
-    inputs.nixos-wsl.nixosModules.wsl
     ./dm/plasma.nix
   ];
-  wsl = {
-    enable = true;
-    wslConf.automount.root = "/mnt";
-    defaultUser = curUser;
-    startMenuLaunchers = true;
-  };
 
   # system environments
   environment.systemPackages = with pkgs; [

@@ -7,7 +7,7 @@
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
   imports = [
-    ./shell/default.nix
+    ../modules/shell/default.nix
   ];
 
   home.packages = [
@@ -29,6 +29,12 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  home.programs.git = {
+    enble = true;
+    userName = "Aor-Li";
+    userEmail = "liyifeng0039@gmail.com";
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

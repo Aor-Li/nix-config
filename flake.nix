@@ -14,38 +14,28 @@
     # hyprland.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }@inputs: let    
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }@inputs: let
     system = "x86_64-linux";
     lib = nixpkgs.lib;
     pkgs = nixpkgs.legacyPackages.${system};
+    
+    hosts = [ "wsl-nixos" "wsl-nixos-hw" "aoostar"];
+    users = [ "aor" ];
   in {
-    nixosConfigurations = {
-      wsl = nixpkgs.lib.nixosSystem {
+    nixosConfigurations = lib.genAttrs hosts (hostname: 
+      nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs nixpkgs;
-          curUser = "aor";
         };
-        inherit system;
-        modules = [ ./machines/wsl.nix ];
-      };
-    };
-    nixosConfigurations = {
-      aoostar = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs nixpkgs;
-          curUser = "aor";
-        };
-        inherit system;
-        modules = [ ./machines/aoostar.nix ];
-      };
-    };
+        system = "x86_64-linux";
+        modules = [ ./hosts/${hostname}.nix ];
+      });   
 
-    homeManagerConfigurations = {
-      aor = home-manager.lib.homeManagerConfiguration {
+    homeManagerConfigurations = lib.genAttrs users (username:
+      home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./users/aor.nix ];
-      };
-    };
+        modules = [ ./users/${username}.nix ];
+      });
   };
 }
 

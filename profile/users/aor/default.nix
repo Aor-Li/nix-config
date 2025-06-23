@@ -11,8 +11,7 @@ in {
 
   # config modules
   imports = [
-    ../modules/base/home.nix
-    ../modules/shell/default.nix
+    ../../../user/base/home.nix
   ];
  
   home.packages = [

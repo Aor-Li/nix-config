@@ -14,10 +14,9 @@ in {
   # config modules
   imports = [
     inputs.nixos-wsl.nixosModules.wsl
-    ../../modules/base/default.nix
-    # ./dm/plasma.nix
+    ../../../system/base
   ];
-  
+
   wsl = {
     enable = true;
     defaultUser = "aor";

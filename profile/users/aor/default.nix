@@ -1,15 +1,20 @@
 { config, pkgs, ... }:
+let
+  userConfig = {
+    username = "aor";
+  };
+in {
+  # pass user config to modules
+  _module.args = {
+    inherit userConfig;
+  };
 
-{
-  programs.home-manager.enable = true;
-  home.username = "aor";
-  home.homeDirectory = "/home/aor";
-  home.stateVersion = "25.05"; # Please read the comment before changing.
-
+  # config modules
   imports = [
+    ../modules/base/home.nix
     ../modules/shell/default.nix
   ];
-
+ 
   home.packages = [
     pkgs.hello
     pkgs.git

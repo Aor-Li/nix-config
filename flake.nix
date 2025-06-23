@@ -28,10 +28,10 @@
           inherit inputs nixpkgs;
         };
         system = "x86_64-linux";
-        modules = [ ./hosts/${hostname}.nix ];
-      });   
+        modules = [ ./hosts/${hostname} ];
+      });
 
-    homeManagerConfigurations = lib.genAttrs users (username:
+    homeConfigurations = lib.genAttrs users (username:
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./users/${username}.nix ];

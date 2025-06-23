@@ -12,6 +12,7 @@
 
   home.packages = [
     pkgs.hello
+    pkgs.git
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -30,8 +31,8 @@
     # '')
   ];
 
-  home.programs.git = {
-    enble = true;
+  programs.git = {
+    enable = true;
     userName = "Aor-Li";
     userEmail = "liyifeng0039@gmail.com";
   };

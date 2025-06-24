@@ -4,8 +4,11 @@
   environment.systemPackages = with pkgs; [
     git
     vim
-    wget
     htop
+    wget
+    coreutils
   ];
   environment.variables.EDITOR = "vim";
+  
+  services.timesyncd.servers = [ "time.cloudflare.com" ];
 }

@@ -1,17 +1,22 @@
 { config, pkgs, ... }:
+let
+  userConfig = {
+    username = "aor";
+  };
+in {
+  # pass user config to modules
+  _module.args = {
+    inherit userConfig;
+  };
 
-{
-  programs.home-manager.enable = true;
-  home.username = "aor";
-  home.homeDirectory = "/home/aor";
-  home.stateVersion = "25.05"; # Please read the comment before changing.
-
+  # config modules
   imports = [
-    ../modules/shell/default.nix
+    ../../../user/base/home.nix
   ];
-
+ 
   home.packages = [
     pkgs.hello
+    pkgs.git
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -30,8 +35,8 @@
     # '')
   ];
 
-  home.programs.git = {
-    enble = true;
+  programs.git = {
+    enable = true;
     userName = "Aor-Li";
     userEmail = "liyifeng0039@gmail.com";
   };

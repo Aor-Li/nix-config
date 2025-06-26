@@ -1,27 +1,36 @@
-{ pkgs, inputs, curUser, ... }: 
-{
-  # config nix functions
-  nix.settings.substituters = [
-    "https://mirror.sjtu.edu.cn/nix-channels/store"
-    "https://mirrors.ustc.edu.cn/nix-channels/store"
-  ];
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  programs.nix-ld = {
-    enable = true;
-    package = pkgs.nix-ld-rs;
+{ pkgs, inputs, ... }: 
+let
+  systemConfig = {
+    hostname = "aoostar";
+    system = "x86_64-linux";
+    machine_type = "server"; # "desktop", "server", "wsl"
+    users = [ "aor" ]; 
   };
-  system.stateVersion = "24.11";
-
-  # config modules
+in {
+  _module.args = {
+    inherit systemConfig;
+  };
   imports = [
-    ./dm/plasma.nix
+    ./hardware-configuration.nix
+    ../../../system/base
   ];
 
-  # system environments
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    wget
-  ];
-  environment.variables.EDITOR = "vim";
+  # # Configure keymap in X11
+  # services.xserver.xkb = {
+  #   layout = "us";
+  #   variant = "";
+  # };
+# 
+  # # Enable sound with pipewire.
+  # hardware.pulseaudio.enable = false;
+  # security.rtkit.enable = true;
+  # services.pipewire = {
+  #   enable = true;
+  #   alsa.enable = true;
+  #   alsa.support32Bit = true;
+  #   pulse.enable = true;
+  # };
+  
+  
+
 }

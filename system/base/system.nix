@@ -25,12 +25,14 @@
 
   # users
   users = lib.mkIf (systemConfig.machine_type == "desktop" || systemConfig.machine_type == "server") {
-    users = lib.mapAttrs (name: user: {
-      inherit name;
-      isNormalUser = true;
-      description = "${name}";
-      extraGroups = [ "networkmanager" "wheel" ];
-    }) (lib.listToAttrs (map (user: { name = user; }) systemConfig.users));
+    users = lib.listToAttrs (map (user: {
+      name = user;
+      value = {
+        isNormalUser = true;
+        description = "${user}";
+        extraGroups = [ "networkmanager" "wheel" ];
+      };
+    }) systemConfig.users);
   };
 
   # time and locale
@@ -43,7 +45,7 @@
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = systemConfig.users[0];
+  services.displayManager.autoLogin.user = builtins.elemAt systemConfig.users 0;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

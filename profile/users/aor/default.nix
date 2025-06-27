@@ -12,6 +12,7 @@ in {
   # config modules
   imports = [
     ../../../user/base/home.nix
+    ../../../user/shell/sh.nix
   ];
  
   home.packages = [

@@ -3,6 +3,8 @@ let
   systemConfig = {
     hostname = "wsl-nixos";
     system = "x86_64-linux";
+    machine_type = "wsl"; # "desktop", "server", "wsl"
+    users = [ "aor" ];
   };
 in {
   # pass system config to modules
@@ -20,13 +22,4 @@ in {
   security.pki.certificateFiles = [
     ./certs/huawei_web_secure_internet_gateway.cer
   ];
-
-  # config wsl
-  wsl = {
-    enable = true;
-    wslConf.automount.root = "/mnt";
-    startMenuLaunchers = true;
-    defaultUser = "aor";
-    wslConf.network.hostname = "wsl-nixos-hw";
-  };
 }

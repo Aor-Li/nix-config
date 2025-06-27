@@ -10,6 +10,15 @@
   ];
   environment.variables.EDITOR = "vim";
   
+  # wsl config
+  wsl = lib.mkIf (systemConfig.machine_type == "wsl") {
+    enable = true;
+    defaultUser = builtins.elemAt systemConfig.users 0;
+    startMenuLaunchers = true;
+    wslConf.automount.root = "/mnt";
+    wslConf.network.hostname = systemConfig.hostname;
+  };
+
   # boot loader
   boot.loader = lib.mkIf (systemConfig.machine_type == "desktop" || systemConfig.machine_type == "server") {
     systemd-boot.enable = true;
@@ -56,7 +65,9 @@
   # disable sleep on server
   systemd.sleep.extraConfig = lib.mkIf (systemConfig.machine_type == "server") ''
     [Sleep]
-    AllowSuspend=yes
-    AllowHibernate=yes
+    AllowSuspend=no
+    AllowHibernate=no
+    AllowHybridSleep=no
+    AllowSuspendThenHibernate=no
   '';
 }

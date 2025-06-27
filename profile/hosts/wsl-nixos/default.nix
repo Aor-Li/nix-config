@@ -3,9 +3,10 @@ let
   systemConfig = {
     hostname = "wsl-nixos";
     system = "x86_64-linux";
+    machine_type = "wsl"; # "desktop", "server", "wsl"
+    users = [ "aor" ];
   };
 in {
-
   # pass system config to modules
   _module.args = {
     inherit systemConfig;
@@ -16,12 +17,4 @@ in {
     inputs.nixos-wsl.nixosModules.wsl
     ../../../system/base
   ];
-
-  wsl = {
-    enable = true;
-    defaultUser = "aor";
-    startMenuLaunchers = true;
-    wslConf.automount.root = "/mnt";
-    wslConf.network.hostname = systemConfig.hostname;
-  };
 }

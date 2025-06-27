@@ -1,0 +1,3 @@
+- [] host和user的module实际都需要hostConfig和userConfig，调整一下结构
+- [] 不同机器需要不同的vpn设置，支持aoostar的vpn
+- [] aoostar安装home manager

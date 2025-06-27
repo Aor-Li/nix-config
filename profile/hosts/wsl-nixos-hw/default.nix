@@ -22,6 +22,7 @@ in {
     ./certs/huawei_web_secure_internet_gateway.cer
   ];
 
+  # config wsl
   wsl = {
     enable = true;
     defaultUser = "aor";

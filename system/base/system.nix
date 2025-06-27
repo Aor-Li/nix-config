@@ -65,7 +65,9 @@
   # disable sleep on server
   systemd.sleep.extraConfig = lib.mkIf (systemConfig.machine_type == "server") ''
     [Sleep]
-    AllowSuspend=yes
-    AllowHibernate=yes
+    AllowSuspend=no
+    AllowHibernate=no
+    AllowHybridSleep=no
+    AllowSuspendThenHibernate=no
   '';
 }

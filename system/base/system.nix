@@ -10,5 +10,8 @@
   ];
   environment.variables.EDITOR = "vim";
   
+  # programs
+  programs.fish.enable = true;
+
   services.timesyncd.servers = [ "time.cloudflare.com" ];
 }

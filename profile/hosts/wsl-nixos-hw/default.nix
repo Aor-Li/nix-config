@@ -5,6 +5,7 @@ let
     system = "x86_64-linux";
   };
 in {
+
   # pass system config to modules
   _module.args = {
     inherit systemConfig;
@@ -23,9 +24,9 @@ in {
 
   wsl = {
     enable = true;
-    wslConf.automount.root = "/mnt";
-    startMenuLaunchers = true;
     defaultUser = "aor";
-    wslConf.network.hostname = "wsl-nixos-hw";
+    startMenuLaunchers = true;
+    wslConf.automount.root = "/mnt";
+    wslConf.network.hostname = systemConfig.hostname;
   };
 }

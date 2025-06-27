@@ -52,4 +52,11 @@
 
   # openSSH
   services.openssh.enable = true;
+
+  # disable sleep on server
+  systemd.sleep.extraConfig = lib.mkIf (systemConfig.machine_type == "server") ''
+    [Sleep]
+    AllowSuspend=yes
+    AllowHibernate=yes
+  '';
 }

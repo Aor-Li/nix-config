@@ -17,4 +17,13 @@ in {
     inputs.nixos-wsl.nixosModules.wsl
     ../../../system/base
   ];
+
+  # wsl config
+  wsl = {
+    enable = true;
+    defaultUser = builtins.elemAt systemConfig.users 0;
+    startMenuLaunchers = true;
+    wslConf.automount.root = "/mnt";
+    wslConf.network.hostname = systemConfig.hostname;
+  };
 }

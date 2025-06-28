@@ -18,16 +18,17 @@
     system = "x86_64-linux";
     lib = nixpkgs.lib;
     pkgs = nixpkgs.legacyPackages.${system};
-    
+    mylib = import ./lib {inherit lib;};
+
     hosts = [ "wsl-nixos" "wsl-nixos-hw" "aoostar"];
     users = [ "aor" ];
   in {
     nixosConfigurations = lib.genAttrs hosts (hostname: 
       nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs nixpkgs;
+          inherit inputs nixpkgs mylib;
         };
-        system = "x86_64-linux";
+        inherit system;
         modules = [ ./profile/hosts/${hostname} ];
       });
 

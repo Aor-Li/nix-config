@@ -1,9 +1,4 @@
-{ pkgs, inputs, ... }:
+{ mylib, ... }:
 {
-  imports = [
-    ./nix
-    ./core
-    ./shell
-    #./network
-  ];
+  imports = mylib.scanPaths ./.;
 }

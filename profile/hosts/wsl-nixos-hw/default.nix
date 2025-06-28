@@ -1,12 +1,18 @@
 { pkgs, inputs, ... }: 
-{
-  imports = [
-    ../../../system
-  ];
-  system = {
+let
+  hostConfig = {
     machine_type = "wsl";
     host_name = "wsl-nixos-hw";
   };
+in
+{
+  _module.args = {
+    inherit hostConfig;
+  };
+
+  imports = [
+    ../../../system
+  ];
 
   # config hw certification
   security.pki.certificateFiles = [

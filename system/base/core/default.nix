@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, hostConfig, ... }:
 {
   # system environments
   environment.systemPackages = with pkgs; [
@@ -11,22 +11,22 @@
   environment.variables.EDITOR = "vim";
 
   # boot loader
-  boot.loader = lib.mkIf (config.system.machine_type == "desktop" ||
-                          config.system.machine_type == "server") {
+  boot.loader = lib.mkIf (hostConfig.machine_type == "desktop" ||
+                          hostConfig.machine_type == "server") {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
 
-  # networking for desktop/server (hostname is set in host config)
-  networking = lib.mkIf (config.system.machine_type == "desktop" || 
-                         config.system.machine_type == "server") {
+  # networking for desktop/server 
+  networking = lib.mkIf (hostConfig.machine_type == "desktop" || 
+                         hostConfig.machine_type == "server") {
     networkmanager.enable = true;
     firewall.enable = true;
   };
 
   # users - define default user for now
-  users = lib.mkIf (config.system.machine_type == "desktop" || 
-                    config.system.machine_type == "server") {
+  users = lib.mkIf (hostConfig.machine_type == "desktop" || 
+                    hostConfig.machine_type == "server") {
     users.aor = {
       isNormalUser = true;
       description = "aor";
@@ -53,7 +53,7 @@
   services.openssh.enable = true;
 
   # disable sleep on server
-  systemd.sleep.extraConfig = lib.mkIf (config.system.machine_type == "server") ''
+  systemd.sleep.extraConfig = lib.mkIf (hostConfig.machine_type == "server") ''
     [Sleep]
     AllowSuspend=no
     AllowHibernate=no

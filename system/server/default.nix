@@ -1,6 +1,6 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, hostConfig, ... }:
 {
-  config = lib.mkIf (config.system.machine_type == "server") {
+  config = lib.mkIf (hostConfig.machine_type == "server") {
     # Server specific configuration goes here
     # For now it's empty, but you can add server-specific services, packages, etc.
   };

@@ -1,7 +1,9 @@
-{ pkgs, inputs, systemConfig, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
-    ./core.nix
-    ./system.nix
+    ./nix
+    ./core
+    ./shell
+    #./network
   ];
 }

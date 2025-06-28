@@ -1,29 +1,23 @@
 { pkgs, inputs, ... }: 
-let 
-  systemConfig = {
-    hostname = "wsl-nixos";
-    system = "x86_64-linux";
-    machine_type = "wsl"; # "desktop", "server", "wsl"
-    users = [ "aor" ];
-  };
-in {
-  # pass system config to modules
-  _module.args = {
-    inherit systemConfig;
-  };
-
+{
   # config modules
   imports = [
-    inputs.nixos-wsl.nixosModules.wsl
-    ../../../system/base
+    ../../../system
+    ../../../system/wsl  # Import WSL-specific modules
   ];
+
+  # Set the machine type
+  system.machine_type = "wsl";
+
+  # Set hostname
+  networking.hostName = "wsl-nixos";
 
   # wsl config
   wsl = {
     enable = true;
-    defaultUser = builtins.elemAt systemConfig.users 0;
+    defaultUser = "aor";
     startMenuLaunchers = true;
     wslConf.automount.root = "/mnt";
-    wslConf.network.hostname = systemConfig.hostname;
+    wslConf.network.hostname = "wsl-nixos";
   };
 }

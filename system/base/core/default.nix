@@ -1,4 +1,4 @@
-{ pkgs, lib, systemConfig, ... }:
+{ pkgs, lib, config, ... }:
 {
   # system environments
   environment.systemPackages = with pkgs; [
@@ -9,32 +9,29 @@
     coreutils
   ];
   environment.variables.EDITOR = "vim";
-  
-
 
   # boot loader
-  boot.loader = lib.mkIf (systemConfig.machine_type == "desktop" || systemConfig.machine_type == "server") {
+  boot.loader = lib.mkIf (config.system.machine_type == "desktop" ||
+                          config.system.machine_type == "server") {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
 
-  # networking
-  networking = lib.mkIf (systemConfig.machine_type == "desktop" || systemConfig.machine_type == "server") {
-    hostName = systemConfig.hostname;
+  # networking for desktop/server (hostname is set in host config)
+  networking = lib.mkIf (config.system.machine_type == "desktop" || 
+                         config.system.machine_type == "server") {
     networkmanager.enable = true;
     firewall.enable = true;
   };
 
-  # users
-  users = lib.mkIf (systemConfig.machine_type == "desktop" || systemConfig.machine_type == "server") {
-    users = lib.listToAttrs (map (user: {
-      name = user;
-      value = {
-        isNormalUser = true;
-        description = "${user}";
-        extraGroups = [ "networkmanager" "wheel" ];
-      };
-    }) systemConfig.users);
+  # users - define default user for now
+  users = lib.mkIf (config.system.machine_type == "desktop" || 
+                    config.system.machine_type == "server") {
+    users.aor = {
+      isNormalUser = true;
+      description = "aor";
+      extraGroups = [ "networkmanager" "wheel" ];
+    };
   };
 
   # time and locale
@@ -47,7 +44,7 @@
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = builtins.elemAt systemConfig.users 0;
+  services.displayManager.autoLogin.user = "aor";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -56,7 +53,7 @@
   services.openssh.enable = true;
 
   # disable sleep on server
-  systemd.sleep.extraConfig = lib.mkIf (systemConfig.machine_type == "server") ''
+  systemd.sleep.extraConfig = lib.mkIf (config.system.machine_type == "server") ''
     [Sleep]
     AllowSuspend=no
     AllowHibernate=no

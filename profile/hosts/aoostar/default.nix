@@ -1,19 +1,16 @@
 { pkgs, inputs, ... }: 
-let
-  systemConfig = {
-    hostname = "aoostar";
-    system = "x86_64-linux";
-    machine_type = "server"; # "desktop", "server", "wsl"
-    users = [ "aor" ]; 
-  };
-in {
-  _module.args = {
-    inherit systemConfig;
-  };
+{
   imports = [
     ./hardware-configuration.nix
-    ../../../system/base
+    ../../../system
+    ../../../system/server  # Import server-specific modules
   ];
+
+  # Set the machine type
+  system.machine_type = "server";
+
+  # Set hostname
+  networking.hostName = "aoostar";
 
   # # Configure keymap in X11
   # services.xserver.xkb = {

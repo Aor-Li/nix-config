@@ -17,7 +17,16 @@ in {
     inputs.nixos-wsl.nixosModules.wsl
     ../../../system/base
   ];
-
+  
+  # wsl config
+  wsl = {
+    enable = true;
+    defaultUser = builtins.elemAt systemConfig.users 0;
+    startMenuLaunchers = true;
+    wslConf.automount.root = "/mnt";
+    wslConf.network.hostname = systemConfig.hostname;
+  };
+  
   # config hw certification
   security.pki.certificateFiles = [
     ./certs/huawei_web_secure_internet_gateway.cer

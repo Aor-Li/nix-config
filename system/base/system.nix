@@ -10,14 +10,7 @@
   ];
   environment.variables.EDITOR = "vim";
   
-  # wsl config
-  wsl = lib.mkIf (systemConfig.machine_type == "wsl") {
-    enable = true;
-    defaultUser = builtins.elemAt systemConfig.users 0;
-    startMenuLaunchers = true;
-    wslConf.automount.root = "/mnt";
-    wslConf.network.hostname = systemConfig.hostname;
-  };
+
 
   # boot loader
   boot.loader = lib.mkIf (systemConfig.machine_type == "desktop" || systemConfig.machine_type == "server") {

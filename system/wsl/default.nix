@@ -1,14 +1,14 @@
-{ pkgs, lib, inputs, config, ... }:
+{ lib, config, inputs, ... }:
 {
   imports = [
     inputs.nixos-wsl.nixosModules.wsl
   ];
 
-  wsl = {
-    enable = true;
-    defaultUser = "aor";  # Default user, can be overridden in host config
-    startMenuLaunchers = true;
-    wslConf.automount.root = "/mnt";
-    # hostname is set in host config, so we don't need to set it here
+  config = lib.mkIf (config.system.machine_type == "wsl") {
+    wsl = {
+      enable = true;
+      startMenuLaunchers = true;
+      wslConf.automount.root = "/mnt";
+    };
   };
 }

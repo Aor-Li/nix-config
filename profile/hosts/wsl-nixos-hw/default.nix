@@ -1,17 +1,13 @@
 { pkgs, inputs, ... }: 
 {
-  # config modules
   imports = [
     ../../../system
-    ../../../system/wsl  # Import WSL-specific modules
   ];
+  system = {
+    machine_type = "wsl";
+    host_name = "wsl-nixos-hw";
+  };
 
-  # Set the machine type
-  system.machine_type = "wsl";
-
-  # Set hostname
-  networking.hostName = "wsl-nixos";
-  
   # config hw certification
   security.pki.certificateFiles = [
     ./certs/huawei_web_secure_internet_gateway.cer

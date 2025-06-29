@@ -14,34 +14,50 @@
     # hyprland.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }@inputs: let
-    system = "x86_64-linux";
-    lib = nixpkgs.lib;
-    pkgs = nixpkgs.legacyPackages.${system};
-    
-    # add custom library
-    mylib = import ./lib {inherit lib;};
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nixos-wsl,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      lib = nixpkgs.lib;
+      pkgs = nixpkgs.legacyPackages.${system};
 
-    hosts = [ "wsl-nixos" "wsl-nixos-hw" "aoostar"];
-    users = [ "aor" ];
-  in {
-    nixosConfigurations = lib.genAttrs hosts (hostname: 
-      nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs nixpkgs mylib;
-        };
-        inherit system;
-        modules = [ ./profile/hosts/${hostname} ];
-      });
+      # add custom library
+      mylib = import ./lib { inherit lib; };
 
-    homeConfigurations = lib.genAttrs users (username:
-      home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = {
-          inherit mylib;
-        };
-        inherit pkgs;
-        modules = [ ./profile/users/${username} ];
-      });
-  };
+      hosts = [
+        "wsl-nixos"
+        "wsl-nixos-hw"
+        "aoostar"
+      ];
+      users = [ "aor" ];
+    in
+    {
+      nixosConfigurations = lib.genAttrs hosts (
+        hostname:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs nixpkgs mylib;
+          };
+          inherit system;
+          modules = [ ./profile/hosts/${hostname} ];
+        }
+      );
+
+      homeConfigurations = lib.genAttrs users (
+        username:
+        home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = {
+            inherit mylib;
+          };
+          inherit pkgs;
+          modules = [ ./profile/users/${username} ];
+        }
+      );
+    };
 }
-

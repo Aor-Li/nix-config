@@ -18,17 +18,6 @@
     nixfmt-rfc-style
   ];
   environment.variables.EDITOR = "vim";
-
-  # default desktop environment
-  services.xserver.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "aor";
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # openSSH
-  services.openssh.enable = true;
 }

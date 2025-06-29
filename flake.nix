@@ -18,6 +18,8 @@
     system = "x86_64-linux";
     lib = nixpkgs.lib;
     pkgs = nixpkgs.legacyPackages.${system};
+    
+    # add custom library
     mylib = import ./lib {inherit lib;};
 
     hosts = [ "wsl-nixos" "wsl-nixos-hw" "aoostar"];
@@ -34,6 +36,9 @@
 
     homeConfigurations = lib.genAttrs users (username:
       home-manager.lib.homeManagerConfiguration {
+        extraSpecialArgs = {
+          inherit mylib;
+        };
         inherit pkgs;
         modules = [ ./profile/users/${username} ];
       });

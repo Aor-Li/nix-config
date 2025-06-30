@@ -8,7 +8,7 @@
   ...
 }:
 {
-  # system environments
+  # system package and environments
   environment.systemPackages = with pkgs; [
     git
     vim

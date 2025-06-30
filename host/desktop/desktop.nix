@@ -1,5 +1,5 @@
-{ pkgs, lib, hostConfig, ... }:
-lib.mkIf (hostConfig.machine_type == "desktop") {
+{ pkgs, hostConfig, ... }:
+{
   # Enable X11 windowing system
   services.xserver = {
     enable = true;

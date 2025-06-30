@@ -1,4 +1,4 @@
 { mylib, ... }:
 {
-  imports = [ ../base ] ++ mylib.scanPaths ./.;
+  imports = [ ../desktop ] ++ mylib.scanPaths ./.;
 }

@@ -11,6 +11,6 @@ in
   };
 
   imports = [
-    ../../../system
+    ../../../host/${hostConfig.machine_type}
   ];
 }

@@ -1,8 +1,9 @@
 { lib, inputs, mylib, hostConfig, ... }:
 {
-  imports = mylib.scanPaths ./. ++ [
+  imports = [ 
+    ../base
     inputs.nixos-wsl.nixosModules.wsl
-  ];
+  ] ++ mylib.scanPaths ./.;
 
   config = lib.mkIf (hostConfig.machine_type == "wsl") {
     wsl = {

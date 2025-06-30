@@ -12,6 +12,6 @@ in
 
   imports = [
     ./hardware-configuration.nix
-    ../../../system
+    ../../../host/${hostConfig.machine_type}
   ];
 }

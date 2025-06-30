@@ -1,6 +1,5 @@
 { ... }:
 {
-  services.openssh.enable = true;
   services.openssh = {
     enable = true;
     settings = {
@@ -8,6 +7,6 @@
       PermitRootLogin = "prohibit-password";
       PasswordAuthentication = true;
       PubkeyAuthentication = true;
-    }
+    };
   };
 }

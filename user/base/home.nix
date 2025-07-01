@@ -1,8 +1,13 @@
-{ pkgs, inputs, userConfig, ... }:
+{
+  pkgs,
+  inputs,
+  userConfig,
+  ...
+}:
 {
   programs.home-manager.enable = true;
-  home.username = userConfig.username;
-  home.homeDirectory = "/home/${userConfig.username}";
+  home.username = userConfig.user_name;
+  home.homeDirectory = "/home/${userConfig.user_name}";
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
   home.packages = [

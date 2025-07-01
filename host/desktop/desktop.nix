@@ -1,10 +1,10 @@
-{ lib, hostConfig, ... }:
-lib.mkIf (hostConfig.machine_type == "desktop") {
+{ pkgs, hostConfig, ... }:
+{
   # Enable X11 windowing system
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
 
   # Enable the KDE Plasma Desktop Environment
@@ -20,8 +20,7 @@ lib.mkIf (hostConfig.machine_type == "desktop") {
   };
 
   # Enable sound with pipewire for better audio experience
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -31,7 +30,7 @@ lib.mkIf (hostConfig.machine_type == "desktop") {
   };
 
   # Enable touchpad support (for laptops)
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Enable printing services
   services.printing.enable = true;
@@ -80,7 +79,7 @@ lib.mkIf (hostConfig.machine_type == "desktop") {
   # Configure fonts
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     liberation_ttf
     fira-code

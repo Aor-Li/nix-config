@@ -11,7 +11,7 @@ in
   };
 
   imports = [
-    ../../../system
+    ../../../host/${hostConfig.machine_type}
   ];
 
   # config hw certification

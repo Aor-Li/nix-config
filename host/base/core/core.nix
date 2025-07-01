@@ -8,7 +8,7 @@
   ...
 }:
 {
-  # system environments
+  # system package and environments
   environment.systemPackages = with pkgs; [
     git
     vim
@@ -18,6 +18,7 @@
     nixfmt-rfc-style
   ];
   environment.variables.EDITOR = "vim";
+  
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 }

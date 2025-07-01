@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }: 
 let
   hostConfig = {
-    machine_type = "desktop";
+    machine_type = "server";
     host_name = "aoostar";
   };
 in 
@@ -12,6 +12,6 @@ in
 
   imports = [
     ./hardware-configuration.nix
-    ../../../system
+    ../../../host/${hostConfig.machine_type}
   ];
 }

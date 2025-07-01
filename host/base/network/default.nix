@@ -6,7 +6,7 @@
 
   networking = {
     networkmanager.enable = true;
-    hostName = "${hostConfig.host_name}";
+    hostName = hostConfig.host_name;
     firewall.enable = false;
   };
 }

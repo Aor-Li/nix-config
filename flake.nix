@@ -9,6 +9,10 @@
     # wsl
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+    # nixvim
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
     # # hyperland
     # hyprland.url = "github:hyprwm/Hyprland";
     # hyprland.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,6 +24,7 @@
       nixpkgs,
       home-manager,
       nixos-wsl,
+      nixvim,
       ...
     }@inputs:
     let
@@ -42,7 +47,7 @@
         hostname:
         nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit inputs nixpkgs mylib;
+            inherit inputs mylib;
           };
           inherit system;
           modules = [ ./profile/hosts/${hostname} ];
@@ -53,7 +58,7 @@
         username:
         home-manager.lib.homeManagerConfiguration {
           extraSpecialArgs = {
-            inherit mylib;
+            inherit inputs mylib;
           };
           inherit pkgs;
           modules = [ ./profile/users/${username} ];

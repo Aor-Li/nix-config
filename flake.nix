@@ -12,6 +12,8 @@
     # # hyperland
     # hyprland.url = "github:hyprwm/Hyprland";
     # hyprland.inputs.nixpkgs.follows = "nixpkgs";
+    # lazyvim nixcat flake
+    lazyvim.url = "path:./flakes/lazyvim";
   };
 
   outputs =
@@ -53,7 +55,7 @@
         username:
         home-manager.lib.homeManagerConfiguration {
           extraSpecialArgs = {
-            inherit mylib;
+            inherit inputs mylib;
           };
           inherit pkgs;
           modules = [ ./profile/users/${username} ];

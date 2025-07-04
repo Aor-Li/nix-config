@@ -6,8 +6,6 @@
   ...
 }:
 {
-  # 网络代理配置
-  # 安装代理相关软件包
   environment.systemPackages = with pkgs; [
     clash-meta # Clash Meta 内核，支持更多协议和规则
     clash-verge-rev # Clash 图形界面客户端
@@ -15,11 +13,8 @@
     sing-box # 新一代代理工具
     proxychains-ng # 命令行代理工具
     geoip # IP 地理位置数据库
-    curl # 用于测试连接
-    wget # 下载工具
   ];
 
-  # 手动配置 Clash Meta 服务
   systemd.services.clash-meta = {
     enable = true;
     description = "Clash Meta Proxy Service";
@@ -78,13 +73,13 @@
 
       # 代理配置（需要根据实际情况修改）
       proxies:
-        # 示例 SOCKS5 代理配置
-        - name: "proxy-server"
-          type: socks5
-          server: "127.0.0.1"
-          port: 1080
+        # 示例 SOCKS5 代理配置 # todo: set to secrets
+        - name: "justmysocks1"
+          type: Shadowsocks
+          server: "c76s1.portablesubmarines.com"
+          port: 13392
           # username: "user"
-          # password: "pass"
+          password: "v7thMbKWvqyVJmzZ"
 
       # 代理组配置
       proxy-groups:

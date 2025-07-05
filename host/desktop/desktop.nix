@@ -1,22 +1,28 @@
 { pkgs, hostConfig, ... }:
 {
-  # Enable X11 windowing system
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
-  };
+  # Enable Wayland
+  services.xserver.enable = true;
+  services.displayManager.defaultSession = "plasma";
 
-  # Enable the KDE Plasma Desktop Environment
+  # Enable the KDE Plasma Desktop Environment with Wayland
   services.desktopManager.plasma6.enable = true;
 
-  # Enable SDDM display manager
+  # Enable SDDM display manager with Wayland support
   services.displayManager = {
-    sddm.enable = true;
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
     autoLogin = {
       enable = true;
       user = "aor";
     };
+  };
+
+  # Keyboard layout
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
   };
 
   # Enable sound with pipewire for better audio experience

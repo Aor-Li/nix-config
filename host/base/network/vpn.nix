@@ -73,12 +73,12 @@
 
       # 代理配置（需要根据实际情况修改）
       proxies:
-        # 示例 SOCKS5 代理配置 # todo: set to secrets
+        # 示例 Shadowsocks 代理配置 # todo: set to secrets
         - name: "justmysocks1"
-          type: Shadowsocks
+          type: ss
           server: "c76s1.portablesubmarines.com"
           port: 13392
-          # username: "user"
+          cipher: "aes-256-gcm"
           password: "v7thMbKWvqyVJmzZ"
 
       # 代理组配置
@@ -86,7 +86,7 @@
         - name: "PROXY"
           type: select
           proxies:
-            - "proxy-server"
+            - "justmysocks1"
             - "DIRECT"
         
         - name: "国际流量"
@@ -130,7 +130,8 @@
         - IP-CIDR,172.16.0.0/12,DIRECT
         - IP-CIDR,192.168.0.0/16,DIRECT
         - IP-CIDR,127.0.0.0/8,DIRECT
-        - GEOIP,CN,国内流量
+        # 注释掉 GEOIP 规则，因为可能无法下载 MMDB 数据库
+        # - GEOIP,CN,国内流量
         
         # 默认规则
         - MATCH,国际流量

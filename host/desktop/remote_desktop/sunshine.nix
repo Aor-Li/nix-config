@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   environment.systemPackages = [
     pkgs.sunshine
@@ -7,16 +7,16 @@
   services.sunshine = {
     enable = true;
     autoStart = true;
-    # capSysAdim = true;
+    capSysAdmin = true;
     openFirewall = true;
   };
   
-  security.wrappers.sunshine = {
-      owner = "root";
-      group = "root";
-      capabilities = "cap_sys_admin+p";
-      source = "${pkgs.sunshine}/bin/sunshine";
-  };
+  #security.wrappers.sunshine = {
+  #    owner = "root";
+  #    group = "root";
+  #    capabilities = "cap_sys_admin+p";
+  #    source = "${pkgs.sunshine}/bin/sunshine";
+  #};
   
   networking.firewall = {
     allowedTCPPorts = [

@@ -32,8 +32,8 @@
 
   # Early KMS (Kernel Mode Setting) for Intel graphics
   boot.kernelParams = [
-    "i915.enable_guc=3"  # Enable GuC and HuC firmware loading
-    "i915.enable_psr=1"  # Enable Panel Self Refresh
+    "i915.enable_guc=3" # Enable GuC and HuC firmware loading
+    "i915.enable_psr=1" # Enable Panel Self Refresh
   ];
 
   # Environment variables for hardware acceleration

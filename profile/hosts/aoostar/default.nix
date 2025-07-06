@@ -1,10 +1,10 @@
-{ pkgs, inputs, ... }: 
+{ pkgs, inputs, ... }:
 let
   hostConfig = {
     machine_type = "server";
     host_name = "aoostar";
   };
-in 
+in
 {
   _module.args = {
     inherit hostConfig;
@@ -12,7 +12,7 @@ in
 
   imports = [
     ./hardware-configuration.nix
-    ./graphics.nix
+    #./graphics.nix
     ../../../host/${hostConfig.machine_type}
   ];
 }

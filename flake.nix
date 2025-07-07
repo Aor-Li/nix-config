@@ -16,6 +16,8 @@
     # # hyperland
     # hyprland.url = "github:hyprwm/Hyprland";
     # hyprland.inputs.nixpkgs.follows = "nixpkgs";
+    # lazyvim nixcat flake
+    lazyvim.url = "path:./flakes/lazyvim";
   };
 
   outputs =

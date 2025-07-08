@@ -5,4 +5,6 @@
     userName = userConfig.full_name;
     userEmail = userConfig.email;
   };
+
+  programs.lazygit.enable = true;
 }

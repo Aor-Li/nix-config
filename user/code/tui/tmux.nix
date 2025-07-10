@@ -2,7 +2,7 @@
 {
   programs.tmux = {
     enable = true;
-    
+
     # basic settings
     clock24 = true;
     baseIndex = 1;
@@ -42,7 +42,7 @@
 
       # do not rename window automaticly
       set-option -g allow-rename off
-      
+
       # put status bar at top
       set-option -g status-position top
 
@@ -65,6 +65,6 @@
       run-shell ${pkgs.tmuxPlugins.battery}/share/tmux-plugins/battery/battery.tmux
 
       # plugins: yank
-   '';
+    '';
   };
 }

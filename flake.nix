@@ -26,7 +26,6 @@
       nixpkgs,
       home-manager,
       nixos-wsl,
-      nixvim,
       ...
     }@inputs:
     let
@@ -49,7 +48,7 @@
         hostname:
         nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit inputs mylib;
+            inherit inputs nixpkgs mylib;
           };
           inherit system;
           modules = [ ./profile/hosts/${hostname} ];

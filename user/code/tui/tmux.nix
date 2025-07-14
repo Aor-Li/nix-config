@@ -31,6 +31,7 @@
 
       # mouse works as expected
       set-option -g mouse on
+
       # easy-to-remember split pane commands
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
@@ -52,6 +53,10 @@
       # plugins: catppuccin
       set -g @catppuccin_flavor "mocha"
       set -g @catppuccin_window_status_style "slanted" # idk why but rounded not work for me
+      # show window name in tabs
+      set -g @catppuccin_window_default_text "#W"
+      set -g @catppuccin_window_current_text "#W"
+      set -g @catppuccin_window_text "#W"
       run-shell ${pkgs.tmuxPlugins.catppuccin}/share/tmux-plugins/catppuccin/catppuccin.tmux
       set -g status-right-length 100
       set -g status-left-length 100

@@ -9,9 +9,4 @@
   home.username = userConfig.user_name;
   home.homeDirectory = "/home/${userConfig.user_name}";
   home.stateVersion = "25.05"; # Please read the comment before changing.
-
-  home.packages = [
-    pkgs.fzf
-    pkgs.lazygit
-  ];
 }

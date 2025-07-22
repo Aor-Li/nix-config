@@ -30,6 +30,7 @@
       nixpkgs,
       home-manager,
       nixos-wsl,
+      sops-nix,
       ...
     }@inputs:
     let

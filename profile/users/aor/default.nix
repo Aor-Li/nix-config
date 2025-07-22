@@ -20,5 +20,6 @@ in
   # config modules
   imports = [
     ../../../user
+    ./secrets/secrets.nix
   ];
 }

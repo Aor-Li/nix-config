@@ -1,5 +1,6 @@
 {
   inputs,
+  sops-nix,
   userConfig,
   ...
 }:
@@ -16,7 +17,7 @@
     age.keyFile = "/home/${userConfig.user_name}/.config/sops/age/keys.txt";
 
     # sops settings
-    defaultSopsFile = "../../../profile/users/${userConfig.user_name}/secrets.yaml";
+    defaultSopsFile = ../../profile/users/${userConfig.user_name}/secrets/secrets.yaml;
     validateSopsFiles = false;
   };
 

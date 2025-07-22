@@ -7,8 +7,8 @@
 let
   userConfig = {
     user_name = "aor";
-    full_name = "Aor-Li";
-    email = "liyifeng0039@gmail.com";
+    full_name = "l00809570";
+    email = "liyifeng17@hisilicon.com";
   };
 in
 {

@@ -1,7 +1,7 @@
 keys:
-  - &aor age1mjjgu6sxhd3vt0rkpy6p934nsc3dyap5j0z7dcsmmpgr03jn0akqfnj594
+  - &aor age1lugsexhep5d5w09tyd8xem5s06w6umgkpkcnghzh0se29duwh30q32rr6f
 creation_rules:
-  - path_regex: secrets/secrets.yaml$
+  - path_regex: secrets.yaml$
     key_groups:
     - age:
       - *aor
